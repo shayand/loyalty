@@ -31,7 +31,7 @@ public class OpenApiConfig {
         ).addSecurityItem(new SecurityRequirement().addList("keycloak"))
         .components(new Components().addSecuritySchemes("keycloak",
             new SecurityScheme().type(Type.OAUTH2).scheme("bearer").bearerFormat("JWT")
-                .flows(new OAuthFlows().password(
+                .flows(new OAuthFlows().clientCredentials(
                     new OAuthFlow().authorizationUrl(
                         issuerUrl + "/protocol/openid-connect/auth"
                     ).tokenUrl(
