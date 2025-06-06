@@ -31,6 +31,15 @@ spring:
     url: ${database.url}
     username: ${database.username}
     password: ${database.password}
+    driver-class-name: org.postgresql.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 2
+      idle-timeout: 60000        # 1 minutes
+      max-lifetime: 1800000      # 30 minutes
+      connection-timeout: 30000  # 30 second
+      pool-name: LoyaltyPool
   security:
     oauth2:
       resourceserver:
@@ -40,9 +49,7 @@ spring:
   jpa:
     hibernate:
       ddl-auto: none
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
 
   liquibase:
     enabled: true

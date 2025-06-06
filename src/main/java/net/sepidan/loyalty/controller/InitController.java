@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class InitController {
   @PostMapping("first")
   public ResponseEntity first() {
-
+    log.info("First initiated");
     return ResponseEntity.ok("");
   }
 
