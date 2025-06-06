@@ -1,0 +1,14 @@
+version: '3.3'
+services:
+  loyalty:
+    build:
+      context: .
+    networks:
+      - docker-net
+    restart: always
+    ports:
+      - ${TOMCAT_PORT:-9098}:9098
+
+networks:
+  docker-net:
+    external: true
