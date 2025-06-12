@@ -22,7 +22,7 @@ public class InstancesController extends BaseController {
 
   private final InstancesService instancesService;
 
-  @GetMapping(path = "/")
+  @GetMapping()
   public ResponseEntity<PagedResponse<InstancesDto>> getInstances(
       @RequestParam(defaultValue = "0") int page,
       @RequestParam(defaultValue = "10") int size,
