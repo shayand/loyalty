@@ -10,6 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import java.time.ZonedDateTime;
 import java.util.UUID;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +21,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 @Table(name = "instances")
 @NoArgsConstructor
 @RequiredArgsConstructor
+@Data
 public class Instances {
 
   @Id
