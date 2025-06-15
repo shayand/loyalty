@@ -1,7 +1,7 @@
 package net.sepidan.loyalty.dto.mapper;
 
 import net.sepidan.loyalty.dto.InstanceTiersDto;
-import net.sepidan.loyalty.persistent.domain.InstanceTiers;
+import net.sepidan.loyalty.persistent.domain.Tiers;
 import org.mapstruct.BeanMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants.ComponentModel;
@@ -12,11 +12,11 @@ import org.mapstruct.ReportingPolicy;
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = ComponentModel.SPRING)
 public interface InstanceTiersMapper {
 
-  InstanceTiers toEntity(InstanceTiersDto instanceTiersDto);
+  Tiers toEntity(InstanceTiersDto instanceTiersDto);
 
-  InstanceTiersDto toDto(InstanceTiers instanceTiers);
+  InstanceTiersDto toDto(Tiers tiers);
 
   @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-  InstanceTiers partialUpdate(
-      InstanceTiersDto instanceTiersDto, @MappingTarget InstanceTiers instanceTiers);
+  Tiers partialUpdate(
+      InstanceTiersDto instanceTiersDto, @MappingTarget Tiers tiers);
 }

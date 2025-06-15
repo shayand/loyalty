@@ -4,9 +4,10 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.PositiveOrZero;
 import java.io.Serializable;
+import net.sepidan.loyalty.persistent.domain.Tiers;
 
 /**
- * DTO for {@link net.sepidan.loyalty.persistent.domain.InstanceTiers}
+ * DTO for {@link Tiers}
  */
 public record InstanceTiersDto(@NotNull String title, @Positive int level,
                                @PositiveOrZero int pointsThreshold) implements

@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(path = "instances")
-@Tag(name = "Init", description = "instances Controller")
+@Tag(name = "instances", description = "instances Controller")
 @AllArgsConstructor
 @Slf4j
 public class InstancesController extends BaseController {

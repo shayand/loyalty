@@ -10,7 +10,7 @@ import org.mapstruct.NullValuePropertyMappingStrategy;
 import org.mapstruct.ReportingPolicy;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = ComponentModel.SPRING)
-public interface AffliatesMapper {
+public interface AffiliatesMapper {
 
   Affiliates toEntity(AffiliatesDto affiliatesDto);
 

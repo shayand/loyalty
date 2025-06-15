@@ -7,7 +7,6 @@ import net.sepidan.loyalty.dto.InstancesDto;
 import net.sepidan.loyalty.dto.mapper.InstancesMapper;
 import net.sepidan.loyalty.persistent.domain.Instances;
 import net.sepidan.loyalty.persistent.repository.InstancesRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;

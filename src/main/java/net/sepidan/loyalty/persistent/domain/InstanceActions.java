@@ -3,6 +3,8 @@ package net.sepidan.loyalty.persistent.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -17,6 +19,7 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
+import net.sepidan.loyalty.constant.AffiliateActionSlug;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -30,24 +33,34 @@ public class InstanceActions {
 
   @Id
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "instance_action_gen")
-  @SequenceGenerator(name = "instance_action_gen", sequenceName = "instance_action",
+  @SequenceGenerator(name = "instance_action_gen", sequenceName = "instance_action_seq",
       allocationSize = 1)
   private Long id;
+
+  @ManyToOne
+  @JoinColumn(name = "instance_id")
+  @JsonIgnore
+  @ToString.Exclude
+  @NonNull
+  private Instances instance;
 
   @ManyToOne
   @JoinColumn(name = "tier_id")
   @JsonIgnore
   @ToString.Exclude
-  private InstanceTiers tiers;
+  @NonNull
+  private Tiers tiers;
 
   @Column(name = "slug", length = 100)
+  @Enumerated(EnumType.STRING)
   @NonNull
-  private String slug;
+  private AffiliateActionSlug slug;
 
   @Column(name = "description")
   private String description;
 
   @Column(name = "point_achieved")
+  @NonNull
   private int pointAchieved;
 
   @CreationTimestamp

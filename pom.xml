@@ -34,7 +34,7 @@
   <properties>
     <java.version>21</java.version>
     <spring-cloud.version>2024.0.1</spring-cloud.version>
-    <sepidan-common.version>1.0.1</sepidan-common.version>
+    <sepidan-common.version>1.0.2</sepidan-common.version>
     <org.mapstruct.version>1.6.3</org.mapstruct.version>
     <springdoc.version>2.7.0</springdoc.version>
     <spring-boot.validation.version>3.40</spring-boot.validation.version>
@@ -134,6 +134,11 @@
       <artifactId>keycloak-admin-client</artifactId>
       <version>${keycloak.version}</version>
     </dependency>
+    <dependency>
+      <groupId>com.github.eloyzone</groupId>
+      <artifactId>jalali-calendar</artifactId>
+      <version>1.0.0</version>
+    </dependency>
   </dependencies>
   <dependencyManagement>
     <dependencies>
@@ -152,15 +157,13 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.11.0</version>
         <configuration>
           <annotationProcessorPaths>
             <path>
               <groupId>org.projectlombok</groupId>
               <artifactId>lombok</artifactId>
-            </path>
-            <path>
-              <groupId>org.springframework.boot</groupId>
-              <artifactId>spring-boot-configuration-processor</artifactId>
+              <version>${lombok.version}</version>
             </path>
           </annotationProcessorPaths>
         </configuration>

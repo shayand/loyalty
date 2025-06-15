@@ -3,6 +3,7 @@ package net.sepidan.loyalty.persistent.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -33,12 +34,12 @@ public class AffiliateUserPoints {
 
   @Id
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "affiliate_user_points_gen")
-  @SequenceGenerator(name = "affiliate_user_points_gen", sequenceName = "affiliate_user_points",
+  @SequenceGenerator(name = "affiliate_user_points_gen", sequenceName = "affiliate_user_points_seq",
       allocationSize = 1)
   private Long id;
 
-  @ManyToOne
-  @JoinColumn(name = "affiliate_user_id")
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "affiliate_user_id",nullable = false)
   @JsonIgnore
   @ToString.Exclude
   @NonNull
