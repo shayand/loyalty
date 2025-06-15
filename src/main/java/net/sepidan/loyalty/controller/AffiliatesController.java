@@ -8,13 +8,14 @@ import net.sepidan.loyalty.payload.request.AffiliateCreateRequest;
 import net.sepidan.loyalty.persistent.service.AffiliateService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(path = "affiliates")
-@Tag(name = "/affiliate", description = "affiliate Controller")
+@Tag(name = "affiliate", description = "affiliate Controller")
 @AllArgsConstructor
 public class AffiliatesController extends BaseController {
 
@@ -22,7 +23,7 @@ public class AffiliatesController extends BaseController {
 
   @PostMapping(name = "/register")
   private ResponseEntity<AffiliatesDto> registerAffiliate(
-      @Valid @RequestParam AffiliateCreateRequest affiliateCreateRequest) {
+      @Valid @RequestBody AffiliateCreateRequest affiliateCreateRequest) {
     return ResponseEntity.ok(affiliateService.createAffiliate(affiliateCreateRequest));
   }
 }

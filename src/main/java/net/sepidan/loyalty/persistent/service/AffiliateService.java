@@ -27,6 +27,7 @@ public class AffiliateService {
   private final AffiliatesMapper affiliatesMapper;
   private final InstancesService instancesService;
   private final InstanceActionsService instanceActionsService;
+  private final AffiliateUsersService affiliateUsersService;
 
   public AffiliatesDto createAffiliate(AffiliateCreateRequest affiliateCreateRequest) {
     return createAffiliate(affiliateCreateRequest.getInstance(),
@@ -46,7 +47,7 @@ public class AffiliateService {
           newAffiliate.setIndicatorValue(value);
           affiliatesRepository.save(newAffiliate);
 
-          instanceActionsService.joinAffiliate(newAffiliate, instances);
+          instanceActionsService.joinAffiliate(newAffiliate,instances);
 
           return newAffiliate;
         }

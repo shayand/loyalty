@@ -20,25 +20,23 @@ public class InstanceActionsService {
   private final InstanceActionsRepository instanceActionsRepository;
   private final TiersService tiersService;
   private final AffiliateUsersService affiliateUsersService;
+  private final AffiliateUserPointsService affiliateUserPointsService;
 
   public InstanceActions save(InstanceActions instanceActions) {
     return instanceActionsRepository.save(instanceActions);
   }
 
-  public InstanceActions joinAffiliate(Affiliates affiliates, Instances instances) {
+  public InstanceActions joinAffiliate(Affiliates selectedAffiliate, Instances selectedInstance) {
     Tiers lowestTiers = tiersService.getSingleBySlug(TierSlug.BRONZE)
         .orElseThrow(ResourceNotFoundException::new);
 
-    InstanceActions currentAction = new InstanceActions();
-    currentAction.setInstance(instances);
-    currentAction.setTiers(lowestTiers);
-    currentAction.setSlug(AffiliateActionSlug.JOIN);
-    currentAction.setPointAchieved(20);
+    AffiliateUsers selectedAffiliateUser = affiliateUsersService.saveAffiliateUsers(
+        selectedAffiliate, lowestTiers, selectedInstance);
 
-    affiliateUsersService.saveAffiliateUsers(affiliates, lowestTiers, instances);
-
-    instanceActionsRepository.save(currentAction);
-
-    return currentAction;
+    InstanceActions joinAction = instanceActionsRepository.findByInstanceAndSlugAndTiers(
+            selectedInstance, AffiliateActionSlug.JOIN, lowestTiers)
+        .orElseThrow(ResourceNotFoundException::new);
+    affiliateUserPointsService.savePoints(selectedAffiliateUser, joinAction);
+    return joinAction;
   }
 }

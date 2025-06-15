@@ -2,9 +2,11 @@ package net.sepidan.loyalty.persistent.service;
 
 import java.util.Optional;
 import lombok.AllArgsConstructor;
+import lombok.NonNull;
 import net.sepidan.common.constant.Instances;
 import net.sepidan.loyalty.persistent.domain.AffiliateUserPoints;
 import net.sepidan.loyalty.persistent.domain.AffiliateUsers;
+import net.sepidan.loyalty.persistent.domain.InstanceActions;
 import net.sepidan.loyalty.persistent.repository.AffiliateUserPointsRepository;
 import org.springframework.stereotype.Service;
 
@@ -19,5 +21,13 @@ public class AffiliateUserPointsService {
     return affiliateUserPointsRepository.
         findFirstByAffiliateUserAndAction_Instance_NameAndAction_DeletedAtNotNullOrderByAction_UpdatedAtDesc(
             currentAffiliateUser, instanceName);
+  }
+
+  public Optional<AffiliateUserPoints> savePoints(@NonNull AffiliateUsers affiliateUsers, @NonNull
+  InstanceActions instanceActions) {
+    AffiliateUserPoints affiliateUserPoints = new AffiliateUserPoints(affiliateUsers,
+        instanceActions);
+    affiliateUserPointsRepository.save(affiliateUserPoints);
+    return Optional.of(affiliateUserPoints);
   }
 }
