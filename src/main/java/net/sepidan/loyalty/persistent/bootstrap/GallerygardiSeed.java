@@ -45,7 +45,7 @@ public class GallerygardiSeed implements CommandLineRunner {
             new InstanceActions(currentInstances, silver, AffiliateActionSlug.INTRODUCE, 200));
       }
 
-      if (!instanceTiersService.existsBySlugAndLevel(TierSlug.GOLD, 1)) {
+      if (!instanceTiersService.existsBySlugAndLevel(TierSlug.GOLD, 2)) {
         Tiers gold = instanceTiersService.create(new Tiers(TierSlug.GOLD, "gold", 2, 5400));
         instanceActionsService.save(
             new InstanceActions(currentInstances, gold, AffiliateActionSlug.JOIN, 50));

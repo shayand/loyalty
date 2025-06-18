@@ -12,6 +12,4 @@ public interface TiersRepository extends JpaRepository<Tiers, Long> {
   Optional<Tiers> findByTierSlugAndLevel(TierSlug tierSlug, int level);
 
   Optional<Tiers> findByTierSlug(TierSlug tierSlug);
-
-
 }

@@ -13,4 +13,6 @@ public interface AffiliatesRepository extends JpaRepository<Affiliates, Long> {
   Optional<Affiliates> findByAffiliateUsers_Instance_NameAndIndicatorType(Instances name,
       AffiliationIndicator indicatorType);
 
+  Optional<Affiliates> getByAffiliationCode(String affiliationCode);
+
 }

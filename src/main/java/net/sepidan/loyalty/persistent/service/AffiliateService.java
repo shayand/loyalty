@@ -7,12 +7,18 @@ import com.github.eloyzone.jalalicalendar.JalaliDate;
 import com.github.eloyzone.jalalicalendar.JalaliDateFormatter;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import net.sepidan.loyalty.constant.AffiliationIndicator;
+import net.sepidan.loyalty.dto.AffiliateUserPointsDto;
+import net.sepidan.loyalty.dto.AffiliatesBalanceDto;
 import net.sepidan.loyalty.dto.AffiliatesDto;
+import net.sepidan.loyalty.dto.InstanceTiersDto;
 import net.sepidan.loyalty.dto.mapper.AffiliatesMapper;
+import net.sepidan.loyalty.dto.mapper.InstanceTiersMapper;
 import net.sepidan.loyalty.exception.ResourceNotFoundException;
 import net.sepidan.loyalty.payload.request.AffiliateCreateRequest;
+import net.sepidan.loyalty.persistent.domain.AffiliateUsers;
 import net.sepidan.loyalty.persistent.domain.Affiliates;
 import net.sepidan.loyalty.persistent.domain.Instances;
 import net.sepidan.loyalty.persistent.repository.AffiliatesRepository;
@@ -27,7 +33,8 @@ public class AffiliateService {
   private final AffiliatesMapper affiliatesMapper;
   private final InstancesService instancesService;
   private final InstanceActionsService instanceActionsService;
-  private final AffiliateUsersService affiliateUsersService;
+  private final AffiliateUserPointsService affiliateUserPointsService;
+  private final InstanceTiersMapper instanceTiersMapper;
 
   public AffiliatesDto createAffiliate(AffiliateCreateRequest affiliateCreateRequest) {
     return createAffiliate(affiliateCreateRequest.getInstance(),
@@ -47,7 +54,7 @@ public class AffiliateService {
           newAffiliate.setIndicatorValue(value);
           affiliatesRepository.save(newAffiliate);
 
-          instanceActionsService.joinAffiliate(newAffiliate,instances);
+          instanceActionsService.joinAffiliate(newAffiliate, instances);
 
           return newAffiliate;
         }
@@ -71,5 +78,19 @@ public class AffiliateService {
     int randomNumber = (int) (Math.random() * (max - min + 1)) + min;
     sb.append(randomNumber);
     return sb.toString();
+  }
+
+  public AffiliatesBalanceDto getAffiliatesBalance(String affiliateCode) {
+    Affiliates affiliates = affiliatesRepository.getByAffiliationCode(affiliateCode)
+        .orElseThrow(ResourceNotFoundException::new);
+
+    AffiliateUsers currentUser = affiliates.getAffiliateUsers().getFirst();
+    List<AffiliateUserPointsDto> affiliateUserPointsDtos = affiliateUserPointsService.affiliateUserPointsList(
+        currentUser);
+    InstanceTiersDto tiersDto = instanceTiersMapper.toDto(currentUser.getTier());
+
+    return new AffiliatesBalanceDto(affiliates.getIndicatorType(), affiliates.getIndicatorValue(),
+        affiliates.getAffiliationCode(), affiliateUserPointsDtos,
+        affiliateUserPointsService.getUserPointsTotal(currentUser), tiersDto);
   }
 }
