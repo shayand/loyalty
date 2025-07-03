@@ -1,3 +1,5 @@
+replicaCount: 1
+
 image:
   repository: reg.sepidan.net/sepidan/loyalty
   tag: latest
@@ -5,6 +7,18 @@ image:
 
 service:
   type: ClusterIP
-  port: 8080
+  port: 9098
 
-resources: {}
+env:
+  TOMCAT_PORT: "9098"
+  KEYCLOAK_URL: "http://localhost:9090"
+  KEYCLOAK_REALM: "sepidan"
+  KEYCLOAK_CLIENT_ID: "loyalty"
+  POSTGRES_HOST: "localhost"
+  POSTGRES_DATABASE: "loyalty"
+  POSTGRES_USER: "db_user"
+  SPRING_PROFILES_ACTIVE: "dev"
+
+secret:
+  KEYCLOAK_CLIENT_SECRET: "hxweayCjTaxakJr5UyfXDdUarUeDicje"
+  POSTGRES_PASSWORD: "very_secret"

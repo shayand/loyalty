@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: loyalty-config
+data:
+  TOMCAT_PORT: "{{ .Values.env.TOMCAT_PORT }}"
+  KEYCLOAK_URL: "{{ .Values.env.KEYCLOAK_URL }}"
+  KEYCLOAK_REALM: "{{ .Values.env.KEYCLOAK_REALM }}"
+  KEYCLOAK_CLIENT_ID: "{{ .Values.env.KEYCLOAK_CLIENT_ID }}"
+  KEYCLOAK_CLIENT_SECRET: "{{ .Values.env.KEYCLOAK_CLIENT_SECRET }}"
+  POSTGRES_HOST: "{{ .Values.env.POSTGRES_HOST }}"
+  POSTGRES_DATABASE: "{{ .Values.env.POSTGRES_DATABASE }}"
+  POSTGRES_USER: "{{ .Values.env.POSTGRES_USER }}"
+  POSTGRES_PASSWORD: "{{ .Values.env.POSTGRES_PASSWORD }}"
+  SPRING_PROFILES_ACTIVE: "{{ .Values.env.SPRING_PROFILES_ACTIVE }}"

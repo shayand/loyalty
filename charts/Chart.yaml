@@ -1,5 +1,6 @@
 apiVersion: v2
-name: loyalty-app
-description: A Java 21 app running on GraalVM
-version: 0.0.1
-appVersion: "0.0.1"
+name: loyalty
+description: A Helm chart for loyalty service
+type: application
+version: 0.1.0
+appVersion: "1.0.0"
