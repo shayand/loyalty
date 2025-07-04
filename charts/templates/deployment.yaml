@@ -21,3 +21,14 @@ spec:
           envFrom:
             - configMapRef:
                 name: loyalty-config
+          env:
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: loyalty-secret
+                  key: POSTGRES_PASSWORD
+            - name: KEYCLOAK_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: loyalty-secret
+                  key: KEYCLOAK_CLIENT_SECRET
