@@ -3,6 +3,8 @@ kind: Deployment
 metadata:
   name: loyalty
 spec:
+{{/*  imagePullSecrets:*/}}
+{{/*    - name: reg-sepidan-cred*/}}
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
