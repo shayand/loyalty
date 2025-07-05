@@ -22,3 +22,14 @@ EXPOSE ${TOMCAT_PORT}
 
 # Run app
 CMD ["java", "-jar", "app.jar"]
+
+### Use small Java runtime
+#FROM eclipse-temurin:21-jdk
+#
+#WORKDIR /app
+## Copy your local built JAR into the image
+#COPY target/loyalty-0.0.1-SNAPSHOT.jar app.jar
+#
+#EXPOSE ${TOMCAT_PORT}
+#
+#CMD ["java", "-jar", "app.jar"]
