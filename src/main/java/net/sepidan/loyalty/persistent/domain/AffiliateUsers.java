@@ -26,10 +26,15 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
 @Table(name = "affiliate_users")
-@RequiredArgsConstructor
 @NoArgsConstructor
 @Data
 public class AffiliateUsers {
+
+  public AffiliateUsers(Affiliates affiliate, Tiers tier, Instances instance) {
+    this.affiliate = affiliate;
+    this.tier = tier;
+    this.instance = instance;
+  }
 
   @Id
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "affiliate_seq_gen")
@@ -39,21 +44,18 @@ public class AffiliateUsers {
   @ManyToOne(fetch = FetchType.LAZY)
   @JsonIgnore
   @ToString.Exclude
-  @NonNull
   private Affiliates affiliate;
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name="tier_id")
   @JsonIgnore
   @ToString.Exclude
-  @NonNull
   private Tiers tier;
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name="instance_id")
   @JsonIgnore
   @ToString.Exclude
-  @NonNull
   private Instances instance;
 
   @OneToMany(mappedBy = "affiliateUser", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)

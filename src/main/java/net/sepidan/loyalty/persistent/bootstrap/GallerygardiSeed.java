@@ -2,6 +2,7 @@ package net.sepidan.loyalty.persistent.bootstrap;
 
 import java.util.Optional;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.sepidan.loyalty.constant.AffiliateActionSlug;
 import net.sepidan.loyalty.constant.TierSlug;
@@ -15,7 +16,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 @Component
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Slf4j
 public class GallerygardiSeed implements CommandLineRunner {
 

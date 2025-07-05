@@ -13,8 +13,6 @@ import jakarta.persistence.UniqueConstraint;
 import java.time.ZonedDateTime;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
 import net.sepidan.loyalty.constant.TierSlug;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -25,9 +23,15 @@ import org.hibernate.annotations.UpdateTimestamp;
     uniqueConstraints = @UniqueConstraint(columnNames = {"tier_slug", "level", "deleted_at"})
 )
 @NoArgsConstructor
-@RequiredArgsConstructor
 @Data
 public class Tiers {
+
+  public Tiers(TierSlug tierSlug, String title, int level, int pointsThreshold) {
+    this.tierSlug = tierSlug;
+    this.title = title;
+    this.level = level;
+    this.pointsThreshold = pointsThreshold;
+  }
 
   @Id
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "instance_tiers_seq_gen")
@@ -36,19 +40,15 @@ public class Tiers {
 
   @Column(name = "tier_slug")
   @Enumerated(EnumType.STRING)
-  @NonNull
   private TierSlug tierSlug;
 
   @Column(name = "title", length = 100)
-  @NonNull
   private String title;
 
   @Column(name = "level")
-  @NonNull
   private int level;
 
   @Column(name = "points_threshold")
-  @NonNull
   private int pointsThreshold;
 
   @CreationTimestamp

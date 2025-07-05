@@ -27,9 +27,16 @@ import org.hibernate.annotations.UpdateTimestamp;
 @Table(name = "instance_action", uniqueConstraints = @UniqueConstraint(columnNames = {"tier_id",
     "slug"}))
 @NoArgsConstructor
-@RequiredArgsConstructor
 @Data
 public class InstanceActions {
+
+  public InstanceActions(Instances instance, Tiers tiers, AffiliateActionSlug slug,
+      int pointAchieved) {
+    this.instance = instance;
+    this.tiers = tiers;
+    this.slug = slug;
+    this.pointAchieved = pointAchieved;
+  }
 
   @Id
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "instance_action_gen")
@@ -41,26 +48,22 @@ public class InstanceActions {
   @JoinColumn(name = "instance_id")
   @JsonIgnore
   @ToString.Exclude
-  @NonNull
   private Instances instance;
 
   @ManyToOne
   @JoinColumn(name = "tier_id")
   @JsonIgnore
   @ToString.Exclude
-  @NonNull
   private Tiers tiers;
 
   @Column(name = "slug", length = 100)
   @Enumerated(EnumType.STRING)
-  @NonNull
   private AffiliateActionSlug slug;
 
   @Column(name = "description")
   private String description;
 
   @Column(name = "point_achieved")
-  @NonNull
   private int pointAchieved;
 
   @CreationTimestamp
