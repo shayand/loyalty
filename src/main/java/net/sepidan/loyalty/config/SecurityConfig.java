@@ -25,13 +25,10 @@ public class SecurityConfig {
   @Bean
   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     http
-        .authorizeHttpRequests((authorize) ->
-            authorize.requestMatchers("/", "/api-docs/**").permitAll()
-                .anyRequest().authenticated()
-        )
+        .authorizeHttpRequests((authorize) -> authorize.requestMatchers("/", "/api-docs/**").permitAll()
+            .anyRequest().authenticated())
         .oauth2ResourceServer((oauth2) -> oauth2
-            .jwt(Customizer.withDefaults())
-        );
+            .jwt(Customizer.withDefaults()));
     return http.build();
   }
 
