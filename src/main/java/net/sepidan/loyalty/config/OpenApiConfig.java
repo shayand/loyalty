@@ -16,7 +16,8 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @OpenAPIDefinition(servers = {
-    @Server(url = "http://localhost:9098", description = "main env")
+    @Server(url = "http://localhost:9098", description = "local env"),
+    @Server(url = "https://gateway.sepidan.net/loyalty", description = "main env")
 })
 public class OpenApiConfig {
 

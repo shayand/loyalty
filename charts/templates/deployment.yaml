@@ -2,9 +2,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: loyalty
+  labels:
+    app: loyalty
 spec:
-{{/*  imagePullSecrets:*/}}
-{{/*    - name: reg-sepidan-cred*/}}
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
@@ -14,7 +14,10 @@ spec:
       labels:
         app: loyalty
     spec:
-      imagePullSecrets: {{ .Values.imagePullSecrets }}
+      imagePullSecrets:
+{{- range .Values.imagePullSecrets }}
+        - name: {{ .name }}
+{{- end }}
       containers:
         - name: loyalty
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
