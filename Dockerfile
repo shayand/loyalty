@@ -21,7 +21,7 @@ COPY --from=builder /app/target/*.jar app.jar
 EXPOSE ${TOMCAT_PORT}
 
 # Run app
-CMD ["java", "-jar", "app.jar"]
+CMD ["java", "-XX:+UseContainerSupport","-jar", "app.jar"]
 
 ### Use small Java runtime
 #FROM eclipse-temurin:21-jdk
