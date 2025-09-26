@@ -19,7 +19,7 @@ server:
 spring:
   application:
     name: loyalty
-    version: 1.0.3
+    version: 1.0.4
   servlet:
     multipart:
       max-file-size: 10MB
