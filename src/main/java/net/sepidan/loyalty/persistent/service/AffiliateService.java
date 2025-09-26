@@ -43,8 +43,8 @@ public class AffiliateService {
 
   public AffiliatesDto createAffiliate(net.sepidan.common.constant.Instances currentInstance,
       AffiliationIndicator affiliationIndicator, String value) {
-    Affiliates currentAffiliate = affiliatesRepository.findByAffiliateUsers_Instance_NameAndIndicatorType(
-        currentInstance, affiliationIndicator).orElseGet(
+    Affiliates currentAffiliate = affiliatesRepository.findFirstByAffiliateUsers_Instance_NameAndIndicatorTypeAndIndicatorValue(
+        currentInstance, affiliationIndicator, value).orElseGet(
         () -> {
           Instances instances = instancesService.findByName(
               currentInstance).orElseThrow(ResourceNotFoundException::new);
