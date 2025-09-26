@@ -3,4 +3,4 @@ name: loyalty
 description: A Helm chart for loyalty service
 type: application
 version: 0.1.6
-appVersion: "1.0.1"
+appVersion: "1.0.3"

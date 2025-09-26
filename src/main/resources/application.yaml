@@ -19,7 +19,7 @@ server:
 spring:
   application:
     name: loyalty
-    version: 1.0.1
+    version: 1.0.3
   servlet:
     multipart:
       max-file-size: 10MB
@@ -68,7 +68,6 @@ spring:
 springdoc:
   swagger-ui:
     path: /api-docs/swagger-ui
-    config-url: /loyalty/api-docs/manual/swagger-config
   api-docs:
     path: /api-docs/manual
 
