@@ -19,7 +19,7 @@ server:
 spring:
   application:
     name: loyalty
-    version: 1.0.0
+    version: 1.0.1
   servlet:
     multipart:
       max-file-size: 10MB
@@ -74,6 +74,13 @@ springdoc:
 
 logging:
   level:
-    web: debug
-    liquibase: debug
-    feign: debug
+    root: INFO          # Default for everything
+    org.springframework.web: WARN
+    org.hibernate: WARN
+    org.liquibase: INFO
+    org.springframework.cloud.openfeign: INFO
+  file:
+    name: /var/log/myapp/application.log
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} %-5level [%thread] %logger{36} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} %-5level [%thread] %logger{36} - %msg%n"
