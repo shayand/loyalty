@@ -1,0 +1,27 @@
+package net.sepidan.loyalty.config;
+
+import lombok.Value;
+import org.redisson.Redisson;
+import org.redisson.api.RedissonClient;
+import org.redisson.config.Config;
+import org.springframework.context.annotation.Bean;
+
+public class RedisConfig {
+    @Value("${spring.data.redis.host}")
+    private String redisHost;
+
+    @Value("${spring.data.redis.port}")
+    private int redisPort;
+
+    @Value("${spring.data.redis.password}")
+    private String redisPassword;
+
+    @Bean
+    public RedissonClient redissonClient() {
+        Config config = new Config();
+        config.useSingleServer().setAddress("redis://" + redisHost + ":" + redisPort)
+                .setPassword(redisPassword);
+        return Redisson.create(config);
+    }
+
+}
